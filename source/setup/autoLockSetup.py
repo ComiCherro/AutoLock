@@ -144,4 +144,10 @@ def main():
 
        
 if __name__ == "__main__":
-    main()
+    if not pyuac.isUserAdmin():
+        try:
+            pyuac.runAsAdmin()
+        except pywterror:
+            input('admin not granted, please run with admin permissions.\npress enter to exit...')
+    else:      
+        main()
