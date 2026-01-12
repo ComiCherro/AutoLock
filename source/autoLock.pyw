@@ -16,9 +16,9 @@ def setup(firstTimeSetup:bool)->None:
             pass
     except FileNotFoundError:
         try:
-            urlretrieve("https://raw.githubusercontent.com/ComiCherro/AutoLock/refs/heads/main/source/setup/AutoLockSetup.py", rf"C:\users\{backend.getuser()}\Downloads\autoLockSetup.py")
+            urlretrieve("https://raw.githubusercontent.com/ComiCherro/AutoLock/refs/heads/main/source/setup/autoLockSetup.py", rf"C:\users\{backend.getuser()}\Downloads\autoLockSetup.py")
         except URLError:
-            input('setup not accessible from web, please goto\n\nhttps://github.com/ComiCherro/AutoLock/blob/main/source/setup/AutoLockSetup.py\n\nand download + run the file, then rerun AutoLock.\npress enter to exit...')
+            input('setup not accessible from internet, please goto\n\nhttps://github.com/ComiCherro/AutoLock/blob/main/source/setup/autoLockSetup.py\n\nand download + run the file, then rerun AutoLock.\npress enter to exit...')
             exit() 
     if firstTimeSetup:
         doc = subprocess.Popen(["start", "/WAIT", rf"C:\users\{backend.getuser()}\Downloads\autoLockSetup.py",f'fts {backend.os.path.realpath(__file__)}'], shell=True)
