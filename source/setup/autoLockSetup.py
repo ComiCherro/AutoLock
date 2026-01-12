@@ -113,6 +113,7 @@ def WriteKeyAndReg(masterpass:str='')->None:
     Popen(fr'start /WAIT C:\autoLock.pyw', shell=True)
     print('password applied, autolock is now running.')
     sleep(5)
+    exit()
 
 
 def main():
@@ -143,7 +144,7 @@ def main():
     WriteKeyAndReg()
     exit()
 
-
+       
 if __name__ == "__main__":
     if not pyuac.isUserAdmin():
         try:
