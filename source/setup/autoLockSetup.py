@@ -12,7 +12,6 @@ import win32file
 import pyuac
 import os
 
-sleep(2)
 COMP_NAME_HASH:bytes = SHA256.new(os.environ['COMPUTERNAME'].encode()).digest()
 
 
@@ -110,7 +109,7 @@ def WriteKeyAndReg(masterpass:str='')->None:
     copyfile(argv[2],r'C:\AutoLock.pyw')
     
 #everythings done, reruns autolock automatically
-    Popen(fr'start /WAIT C:\autoLock.pyw', shell=True)
+    Popen(fr'start C:\autoLock.pyw', shell=True)
     print('password applied, autolock is now running.')
     sleep(5)
     exit()
@@ -151,5 +150,5 @@ if __name__ == "__main__":
             pyuac.runAsAdmin()
         except pywterror:
             input('admin not granted, please run with admin permissions.\npress enter to exit...')
-    else:      
+    else:  
         main()
