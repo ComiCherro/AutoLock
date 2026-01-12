@@ -12,7 +12,7 @@ import win32file
 import pyuac
 import os
 
-
+sleep(2)
 COMP_NAME_HASH:bytes = SHA256.new(os.environ['COMPUTERNAME'].encode()).digest()
 
 
@@ -130,7 +130,7 @@ def main():
         
     try:
         with wrg.OpenKeyEx(wrg.HKEY_LOCAL_MACHINE,'SOFTWARE\\AutoLock') as AL:
-            savedMasterPass:bytes = wrg.QueryValueEx(AL,'MasterPass')
+            savedMasterPass:bytes = wrg.QueryValueEx(AL,'MasterPass')[0]
     except FileNotFoundError:
         input('master password doesnt exist, meaning first time setup hasnt been run.\nrunning AutoLock will trigger this, as running this file by itself puts it in add user mode.\npress enter to exit...')
         exit()    
@@ -144,10 +144,4 @@ def main():
 
        
 if __name__ == "__main__":
-    if not pyuac.isUserAdmin():
-        try:
-            pyuac.runAsAdmin()
-        except pywterror:
-            input('admin not granted, please run with admin permissions.\npress enter to exit...')
-    else:      
-        main()
+    main()

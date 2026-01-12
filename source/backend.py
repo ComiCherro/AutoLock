@@ -22,7 +22,7 @@ def getRemovableDrives() -> list:
     return(list1)
 
 #checks drives for password
-def checkDrives()->list:
+def checkDrives()->(list|None):
     Drives = getRemovableDrives()
     for drive in Drives:
         try:
@@ -34,20 +34,20 @@ def checkDrives()->list:
             password = None
             continue
     if len(Drives)==0:
-        return [None]
+        return None
     elif (password==None):
-        return [None]
+        return None
     else:
         return [password,correctDrive]
     
 #check if current user has a saved key
-def checkIfSavedKey()->list:
+def checkIfSavedKey()->(bytes|None):
     with wrg.OpenKeyEx(wrg.HKEY_LOCAL_MACHINE,r'SOFTWARE\\AutoLock') as winkey:
         try:
             savedKey:bytes= wrg.QueryValueEx(winkey,getuser())[0]
-            return [savedKey]
+            return savedKey
         except FileNotFoundError:
-            return [None]
+            return None
 
 #check if key is correct
 def keyCheck(key:str,savedKey:bytes)->bool:
