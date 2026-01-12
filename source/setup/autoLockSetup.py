@@ -119,12 +119,14 @@ def main():
     if len(argv)>2:
         if argv[1]=='fts':
             try:
-                with wrg.OpenKeyEx(wrg.HKEY_LOCAL_MACHINE,'SOFTWARE\\AutoLock') as AL:
-                    wrg.QueryValueEx(AL,'MasterPass')
+                with wrg.OpenKeyEx(wrg.HKEY_LOCAL_MACHINE,'SOFTWARE\\AutoLock') as a:
                     input('first time setup already run, not overwriting set master password.\npress enter to exit...')
                     exit()
             except FileNotFoundError:
                 pass
+            except OSError:
+                input('major error occurred.\npress enter to exit...') #registry keys were deleted, needs app monitor alert here.
+                exit()
             masterPassword:str = input('first time setup detected, please enter master password: ')
             WriteKeyAndReg(masterPassword)
             exit()
@@ -135,6 +137,9 @@ def main():
     except FileNotFoundError:
         input('master password doesnt exist, meaning first time setup hasnt been run.\nrunning AutoLock will trigger this, as running this file by itself puts it in add user mode.\npress enter to exit...')
         exit()    
+    except OSError:
+        input('major error occurred.\npress enter to exit...') #registry keys were deleted, needs app monitor alert here.
+        exit()
     checkMasterPass:str = input('master password: ')
     hashCheckMasterPass = scrypt(checkMasterPass, COMP_NAME_HASH, 16, N=2**14, r=8, p=1)
     if (hashCheckMasterPass!=savedMasterPass):

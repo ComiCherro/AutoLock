@@ -9,6 +9,7 @@ import backend
 UsersLocked:list = []
 DRIVES:list = []
 key:str = ""
+
 #setup
 def setup(firstTimeSetup:bool)->None:
     try:
@@ -48,8 +49,8 @@ def main()->None:
 if (__name__=='__main__'):
     #attempt to open reg. key
     try:
-        with backend.wrg.OpenKeyEx(backend.wrg.HKEY_LOCAL_MACHINE,r'SOFTWARE\AutoLock',0,backend.wrg.KEY_READ) as winkey:
-            ALKEY:backend.wrg.HKEYType = winkey
+        with backend.wrg.OpenKeyEx(backend.wrg.HKEY_LOCAL_MACHINE,r'SOFTWARE\AutoLock',0,backend.wrg.KEY_READ) as a:
+            pass
     except FileNotFoundError:
         setup(True)
     main()

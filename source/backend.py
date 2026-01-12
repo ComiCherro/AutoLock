@@ -50,6 +50,8 @@ def checkIfSavedKey()->(bytes|None):
             return savedKey
         except FileNotFoundError:
             return None
+        except OSError:
+            return None #registry keys were deleted, needs app monitor alert here.
 
 #check if key is correct
 def keyCheck(key:str,savedKey:bytes)->bool:
