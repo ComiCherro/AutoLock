@@ -28,9 +28,11 @@ def checkDrives()->(list|None):
         try:
             with open(fr'{drive}\KEY') as passFile:
                 password = passFile.read()
-                correctDrive = drive
                 break
         except FileNotFoundError:
+            password = None
+            continue
+        except OSError:
             password = None
             continue
     if len(Drives)==0:
@@ -38,7 +40,7 @@ def checkDrives()->(list|None):
     elif (password==None):
         return None
     else:
-        return [password,correctDrive]
+        return [password,drive]
     
 #check if current user has a saved key
 def checkIfSavedKey()->(bytes|None):

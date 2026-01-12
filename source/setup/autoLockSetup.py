@@ -1,6 +1,6 @@
 from Cryptodome.Protocol.KDF import scrypt
 from pywintypes import error as pywterror
-from subprocess import run as subRun
+from subprocess import run as subRun, Popen
 from Cryptodome.Hash import SHA256
 from shutil import copyfile
 from getpass import getuser
@@ -110,7 +110,8 @@ def WriteKeyAndReg(masterpass:str='')->None:
     copyfile(argv[2],r'C:\AutoLock.pyw')
     
 #everythings done, reruns autolock automatically
-    print('password applied, please rerun AutoLock.')
+    Popen(fr'start /WAIT C:\autoLock.pyw', shell=True)
+    print('password applied, autolock is now running.')
     sleep(5)
 
 
@@ -140,9 +141,9 @@ def main():
         input('Password is incorrect.\npress enter to exit...')
         exit()
     WriteKeyAndReg()
+    exit()
 
 
-       
 if __name__ == "__main__":
     if not pyuac.isUserAdmin():
         try:
