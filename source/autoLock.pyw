@@ -16,12 +16,12 @@ def setup(firstTimeSetup:bool)->None:
             pass
     except FileNotFoundError:
         try:
-            urlretrieve("https://drive.usercontent.google.com/download?id=1zxusri2Pe_lrspU6gKyoFLkvRPZvajom&export=download&authuser=0&confirm=t&uuid=e8dec365-31aa-4bb0-8ae3-1ee8fa595e89&at=ANTm3czejLvs6nq2t9ZjqfUKOu9O%3A1767689850397", rf"C:\users\{backend.getuser()}\Downloads\autoLockSetup.py")
+            urlretrieve("https://raw.githubusercontent.com/ComiCherro/AutoLock/refs/heads/main/source/setup/AutoLockSetup.py", rf"C:\users\{backend.getuser()}\Downloads\autoLockSetup.py")
         except URLError:
-            input('setup not accessible from web, please goto\n\nhttps://drive.google.com/file/d/1zxusri2Pe_lrspU6gKyoFLkvRPZvajom/view\n\nand download + run the file, then rerun AutoLock.\npress enter to exit...')
+            input('setup not accessible from web, please goto\n\nhttps://github.com/ComiCherro/AutoLock/blob/main/source/setup/AutoLockSetup.py\n\nand download + run the file, then rerun AutoLock.\npress enter to exit...')
             exit() 
     if firstTimeSetup:
-        doc = subprocess.Popen(["start", "/WAIT", rf"C:\users\{backend.getuser()}\Downloads\autoLockSetup.py",f"'fts {backend.os.path.realpath(__file__)}'"], shell=True)
+        doc = subprocess.Popen(["start", "/WAIT", rf"C:\users\{backend.getuser()}\Downloads\autoLockSetup.py",f'fts {backend.os.path.realpath(__file__)}'], shell=True)
     else:
         doc = subprocess.Popen(["start", "/WAIT", rf"C:\users\{backend.getuser()}\Downloads\autoLockSetup.py"], shell=True)
     doc.wait()
@@ -31,7 +31,7 @@ def setup(firstTimeSetup:bool)->None:
 
 def main()->None:
     while True:
-        backend.sleep(.25)
+        backend.sleep(.1)
         key = backend.checkDrives()
         savedKey = backend.checkIfSavedKey()[0]
         if (savedKey==None):
